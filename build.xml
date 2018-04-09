@@ -3,7 +3,7 @@
 <project name="firing-range" default="war">
 
   <!-- Your working directories, change the value of appengine.sdk accordingly. -->
-  <property name="appengine.sdk" location="../.."/>
+  <property name="appengine.sdk" location="/home/CIT/lucasbr/appengine-java-sdk-1.9.63"/>
 
   <!-- Check that the SDK value is set and seems sane, so we can give a nicer
        error if not.  -->
@@ -27,7 +27,7 @@
   <property name="http.port" value="8080"/>
 
   <!-- Address for dev_appserver -->
-  <property name="address" value="localhost"/>
+  <property name="pages.address" value="localhost"/>
 
   <!-- Name of log file to write logs to -->
   <property name="log.file" value="app.log"/>
@@ -72,7 +72,7 @@
   <target name="compile" depends="clean, getjars"
           description="Compile the application servlet code">
     <mkdir dir="${war.dir}/WEB-INF/classes"/>
-    <javac srcdir="src" destdir="${war.dir}/WEB-INF/classes">
+    <javac  target="1.7" source="1.7" srcdir="src" destdir="${war.dir}/WEB-INF/classes">
       <classpath refid="alljars"/>
     </javac>
     <!-- copy data folders -->
@@ -94,14 +94,14 @@
         <include name="**/*.*" />
       </fileset>
     </copy>
-    <!-- copy html pages -->
+    <!-- copy html com.google.testing.security.firingrange.pages -->
     <copy todir="${war.dir}/pages/">
       <fileset dir="src/pages">
         <include name="**/*.*" />
       </fileset>
     </copy>
 
-    <!-- copy index.html to /pages, workaround for now -->
+    <!-- copy index.html to /com.google.testing.security.firingrange.pages, workaround for now -->
     <copy file="${war.dir}/WEB-INF/index.html" todir="${war.dir}/pages/"/>
 	
   </target>
@@ -125,7 +125,7 @@
 
   <target name="runserver" depends="war"
           description="Run the dev_appserver">
-    <dev_appserver war="${war.dir}" address="${address}" port="${http.port}"/>
+    <dev_appserver war="${war.dir}" address="${pages.address}" port="${http.port}"/>
   </target>
 
   <target name="dev_appserver" depends="runserver"/>
@@ -133,10 +133,10 @@
   <target name="debug" depends="war" 
           description="Launches dev_appserver with remote debugging enabled">
     <echo message="Launching dev_appserver on Web port ${http.port}, Java remote debug port ${debug.port}"/>
-    <dev_appserver war="${war.dir}" address="${address}" port="${http.port}">
+    <dev_appserver war="${war.dir}" address="${pages.address}" port="${http.port}">
       <options>
         <arg value="--jvm_flag=-Xdebug"/>
-        <arg value="--jvm_flag=-Xrunjdwp:transport=dt_socket,server=y,suspend=y,address=${debug.port}"/>
+        <arg value="--jvm_flag=-Xrunjdwp:transport=dt_socket,server=y,suspend=y,pages.address=${debug.port}"/>
       </options>
     </dev_appserver>
   </target>
