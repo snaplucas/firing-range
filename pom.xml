@@ -72,7 +72,7 @@
                 <artifactId>appengine-maven-plugin</artifactId>
                 <version>1.9.63</version>
                 <configuration>
-                    <appId>public-firing-range-test</appId> <!-- Override appengine-web.xml <project> -->
+                    <appId>public-firing-range</appId> <!-- Override appengine-web.xml <project> -->
                     <version>1</version>
                     <fullScanSeconds>1</fullScanSeconds>
                     <retainUploadDir>true</retainUploadDir>
