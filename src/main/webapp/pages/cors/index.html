@@ -10,7 +10,7 @@
   <p>Tests verifying the soundness of the Access-Control-Allow-Origin header</p>
   <ul>
     <li>
-      <a href="/pages.cors/alloworigin/dynamicAllowOrigin">Insecure dynamic header generation</a> -
+      <a href="/cors/alloworigin/dynamicAllowOrigin">Insecure dynamic header generation</a> -
       Developers cannot use the wildcard (<code>*</code>) to allow multiple origins while at the
       same time allowing authenticated requests. This is why many implementations create dynamic
       responses based on the <code>Origin</code> header. If an endpoint blindly allows all origins
@@ -20,13 +20,13 @@
       header.
     </li>
     <li>
-      <a href="/pages.cors/alloworigin/allowNullOrigin">Allows null origin</a> -
+      <a href="/cors/alloworigin/allowNullOrigin">Allows null origin</a> -
       Allowing the <code>null</code> origin in an <code>Access-Control-Allow-Origin</code> header is
       equivalent to allowing every origin. Combined with allowing authenticated requests, the same
       concerns as with <i>insecure dynamic header generation</i> apply.
     </li>
     <li>
-      <a href="/pages.cors/alloworigin/allowInsecureScheme">Allows insecure scheme</a> -
+      <a href="/cors/alloworigin/allowInsecureScheme">Allows insecure scheme</a> -
       If an HTTP origin can perform authenticated requests to an HTTPS origin, the purpose of
       SSL/TLS encryption in terms of web security is defeated.
     </li>

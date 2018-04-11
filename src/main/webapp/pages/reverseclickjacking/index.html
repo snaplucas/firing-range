@@ -12,7 +12,7 @@
       <b>Same Origin Method Execution</b> or <b>SOME</b>) vulnerabilities.</p>
 
     <p>A <b>Universal Reverse ClickJacking</b> vulnerability arises when a JSONP
-    <i>callback</i> parameter (i.e. a user-controlled parameter pages.reflected in a
+    <i>callback</i> parameter (i.e. a user-controlled parameter reflected in a
     JS context) is controllable by an attacker by passing something like
     <code>element.click</code> if the parameter ends up in the JSONP callback
     directly or something like <code>%26callback%3Delement.click%23</code> (the
@@ -24,7 +24,7 @@
     <p>This grants an attacker the ability to execute javascript code in the
     context of the page, thus performing actions with side effects, such as
     clicking buttons and submitting forms, on the same page or on different
-    com.google.testing.security.firingrange.pages in the same origin, using frames or popups.</p>
+    com.google.testing.security.firingrange in the same origin, using frames or popups.</p>
 
     <p>If the JSONP endpoint is restrictive in terms of allowed charset for the
     callback this vulnerability does not become a full XSS, since a useful XSS
@@ -36,18 +36,18 @@
   <ul>
     <li>
       <a href=
-      "/pages.reverseclickjacking/singlepage/ParameterInQuery/InCallback/?q=urc_button.click">
+      "/reverseclickjacking/singlepage/ParameterInQuery/InCallback/?q=urc_button.click">
       Page with vulnerable JS and actionable element (parameter in the query,
-      pages.reflected in the callback directly)</a> - the user-provided input ends up
+      reflected in the callback directly)</a> - the user-provided input ends up
       in the JSONP callback directly ( <code>&lt;script
       src="/jsonp?callback=%q"&gt;</code> ).
     </li>
 
     <li>
       <a href=
-      "/pages.reverseclickjacking/singlepage/ParameterInQuery/OtherParameter/?q=%26callback%3Durc_button.click%23">
+      "/reverseclickjacking/singlepage/ParameterInQuery/OtherParameter/?q=%26callback%3Durc_button.click%23">
       Page with vulnerable JS and actionable element (parameter in the query,
-      pages.reflected in another parameter of the JSONP endpoint)</a> - the
+      reflected in another parameter of the JSONP endpoint)</a> - the
       user-provided input ends up in another parameter, but parameter pollution
       is still possible ( <code>&lt;script
       src="/jsonp?callback=callbackFunc&amp;other=%q"&gt;</code> ).
@@ -55,16 +55,16 @@
 
     <li>
       <a href=
-      "/pages.reverseclickjacking/singlepage/ParameterInFragment/InCallback/#q=urc_button.click">
+      "/reverseclickjacking/singlepage/ParameterInFragment/InCallback/#q=urc_button.click">
       Page with vulnerable JS and actionable element (parameter in the
-      fragment, pages.reflected in the callback directly)</a>
+      fragment, reflected in the callback directly)</a>
     </li>
 
     <li>
       <a href=
-      "/pages.reverseclickjacking/singlepage/ParameterInFragment/OtherParameter/#q=%26callback%3Durc_button.click%23">
+      "/reverseclickjacking/singlepage/ParameterInFragment/OtherParameter/#q=%26callback%3Durc_button.click%23">
       Page with vulnerable JS and actionable element (parameter in the
-      fragment, pages.reflected in another parameter of the JSONP endpoint)</a>
+      fragment, reflected in another parameter of the JSONP endpoint)</a>
     </li>
   </ul>
 
@@ -72,14 +72,14 @@
 
   <p>In these com.google.testing.security.firingrange.tests the vulnerable JS snippet is placed in a page with no
   actionable DOM object: in this case, exploitation can be achieved by
-  interacting with other com.google.testing.security.firingrange.pages in the same domain.</p>
+  interacting with other com.google.testing.security.firingrange in the same domain.</p>
 
   <ul>
     <li>
       <a href=
-      "/pages.reverseclickjacking/multipage/ParameterInQuery/InCallback/WithoutXFO/?q=foo">
+      "/reverseclickjacking/multipage/ParameterInQuery/InCallback/WithoutXFO/?q=foo">
       Triggering an action on a different page (with frames, parameter in the
-      query and pages.reflected in the callback directly)</a> - this scenario can be
+      query and reflected in the callback directly)</a> - this scenario can be
       mitigated by setting the <code>X-Frame-Options</code> header to
       <code>DENY</code> , or, in some cases, also <code>SAMEORIGIN</code> , but
       this page allows framing.
@@ -87,16 +87,16 @@
 
     <li>
       <a href=
-      "/pages.reverseclickjacking/multipage/ParameterInQuery/OtherParameter/WithoutXFO/?q=%26callback%3Dfoo%23">
+      "/reverseclickjacking/multipage/ParameterInQuery/OtherParameter/WithoutXFO/?q=%26callback%3Dfoo%23">
       Triggering an action on a different page (with frames, parameter in the
-      query and pages.reflected in another parameter of the JSONP endpoint)</a>
+      query and reflected in another parameter of the JSONP endpoint)</a>
     </li>
 
     <li>
       <a href=
-      "/pages.reverseclickjacking/multipage/ParameterInFragment/InCallback/WithoutXFO/#q=foo">
+      "/reverseclickjacking/multipage/ParameterInFragment/InCallback/WithoutXFO/#q=foo">
       Triggering an action on a different page (with frames, parameter in the
-      fragment and pages.reflected in the callback directly)</a> - this scenario can
+      fragment and reflected in the callback directly)</a> - this scenario can
       be mitigated by setting the <code>X-Frame-Options</code> header to
       <code>DENY</code> , or, in some cases, also <code>SAMEORIGIN</code> , but
       this page allows framing.
@@ -104,16 +104,16 @@
 
     <li>
       <a href=
-      "/pages.reverseclickjacking/multipage/ParameterInFragment/OtherParameter/WithoutXFO/#q=%26callback%3Dfoo%23">
+      "/reverseclickjacking/multipage/ParameterInFragment/OtherParameter/WithoutXFO/#q=%26callback%3Dfoo%23">
       Triggering an action on a different page (with frames, parameter in the
-      fragment and pages.reflected in another parameter of the JSONP endpoint)</a>
+      fragment and reflected in another parameter of the JSONP endpoint)</a>
     </li>
 
     <li>
       <a href=
-      "/pages.reverseclickjacking/multipage/ParameterInQuery/InCallback/WithXFO/?q=foo">
+      "/reverseclickjacking/multipage/ParameterInQuery/InCallback/WithXFO/?q=foo">
       Triggering an action on a different page (with popups, parameter in the
-      query and pages.reflected in the callback directly)</a> - this also works if a
+      query and reflected in the callback directly)</a> - this also works if a
       restrictive <code>X-Frame-Options</code> header is set, but popup
       blockers in browsers might prevent this attack vector from working. This
       page does not allow framing.
@@ -121,16 +121,16 @@
 
     <li>
       <a href=
-      "/pages.reverseclickjacking/multipage/ParameterInQuery/OtherParameter/WithXFO/?q=%26callback%3Dfoo%23">
+      "/reverseclickjacking/multipage/ParameterInQuery/OtherParameter/WithXFO/?q=%26callback%3Dfoo%23">
       Triggering an action on a different page (with popups, parameter in the
-      query and pages.reflected in another parameter of the JSONP endpoint)</a>
+      query and reflected in another parameter of the JSONP endpoint)</a>
     </li>
 
     <li>
       <a href=
-      "/pages.reverseclickjacking/multipage/ParameterInFragment/InCallback/WithXFO/#q=foo">
+      "/reverseclickjacking/multipage/ParameterInFragment/InCallback/WithXFO/#q=foo">
       Triggering an action on a different page (with popups, parameter in the
-      fragment and pages.reflected in the callback directly)</a> - this also works if
+      fragment and reflected in the callback directly)</a> - this also works if
       a restrictive <code>X-Frame-Options</code> header is set, but popup
       blockers in browsers might prevent this attack vector from working. This
       page does not allow framing.
@@ -138,9 +138,9 @@
 
     <li>
       <a href=
-      "/pages.reverseclickjacking/multipage/ParameterInFragment/OtherParameter/WithXFO/#q=%26callback%3Dfoo%23">
+      "/reverseclickjacking/multipage/ParameterInFragment/OtherParameter/WithXFO/#q=%26callback%3Dfoo%23">
       Triggering an action on a different page (with popups, parameter in the
-      fragment and pages.reflected in another parameter of the JSONP endpoint)</a>
+      fragment and reflected in another parameter of the JSONP endpoint)</a>
     </li>
   </ul>
 </body>

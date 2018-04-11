@@ -34,7 +34,7 @@ import javax.servlet.http.HttpServletRequest;
  */
 @Immutable
 public final class Templates {
-  private static final String ERROR_TEMPLATE = "data/error.tmpl";
+  private static final String ERROR_TEMPLATE = "/utils/data/error.tmpl";
   @VisibleForTesting
   public static final String PAYLOAD_PLACEHOLDER = "%%PAYLOAD%%";
   private static final Logger logger = Logger.getLogger(Templates.class.getCanonicalName());
@@ -56,11 +56,12 @@ public final class Templates {
    * Extracts a template given the path relative to a {@code clazz}.
    * @throws IOException if it cannot find the template.
    */
-  public static String getTemplate(String relativePath, Class<? extends HttpServlet> clazz) 
+  public static String getTemplate(String relativePath, Class<? extends HttpServlet> clazz)
       throws IOException {
     Preconditions.checkArgument(!relativePath.contains(".."));
     try {
-      URL resource = Resources.getResource(clazz, "data/" + relativePath);
+      String[] clazzArray  = clazz.getPackage().toString().split("\\.");
+      URL resource = Resources.getResource(clazzArray[clazzArray.length -1] + "/data/" + relativePath);
       return templateToString(resource);
     } catch (IllegalArgumentException e) {
       logger.info("Cannot find template for " + relativePath);

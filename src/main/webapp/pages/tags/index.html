@@ -18,15 +18,15 @@
 <div class="test">
   <p> These vectors only verify if the tag in the request is a certain tag.</p>
   <ul>
-    <li><a href="/pages.tags?q=a">Any tag</a> - Allows any HTML tag in the request.</li>
+    <li><a href="/tags?q=a">Any tag</a> - Allows any HTML tag in the request.</li>
     <li>
-      <a href="/pages.tags/meta?q=a">META</a> -
-      Only allows META pages.tags through. META pages.tags can perform pages.redirect attacks.
+      <a href="/tags/meta?q=a">META</a> -
+      Only allows META tags through. META tags can perform redirect attacks.
     </li>
-    <li><a href="/pages.tags/div?q=a">DIV</a> - Allows any DIV tag.</li>
-    <li><a href="/pages.tags/img?q=a">IMG</a> - Allows any IMG tag. </li>
-    <li><a href="/pages.tags/style?q=a">STYLE</a> - Allows any STYLE tag.</li>
-    <li><a href="/pages.tags/iframe?q=a">IFRAME</a> - Allows any IFRAME tag.</li>
+    <li><a href="/tags/div?q=a">DIV</a> - Allows any DIV tag.</li>
+    <li><a href="/tags/img?q=a">IMG</a> - Allows any IMG tag. </li>
+    <li><a href="/tags/style?q=a">STYLE</a> - Allows any STYLE tag.</li>
+    <li><a href="/tags/iframe?q=a">IFRAME</a> - Allows any IFRAME tag.</li>
   </ul>
 </div>
 
@@ -38,11 +38,11 @@
     The first value is the tag being allowed, the second the specific attribute.
   </p>
   <ul>
-    <li><a href="/pages.tags/div/style?q=a">DIV - STYLE</a></li>
-    <li><a href="/pages.tags/a/href?q=a">HREF - A</a></li>
-    <li><a href="/pages.tags/a/style?q=a">HREF - STYLE</a></li>
-    <li><a href="/pages.tags/script/src?q=a">SCRIPT - SRC</a></li>
-    <li><a href="/pages.tags/body/onload?q=a">BODY - ONLOAD</a></li>
+    <li><a href="/tags/div/style?q=a">DIV - STYLE</a></li>
+    <li><a href="/tags/a/href?q=a">HREF - A</a></li>
+    <li><a href="/tags/a/style?q=a">HREF - STYLE</a></li>
+    <li><a href="/tags/script/src?q=a">SCRIPT - SRC</a></li>
+    <li><a href="/tags/body/onload?q=a">BODY - ONLOAD</a></li>
   </ul>
 </div>
 
@@ -54,14 +54,14 @@
   </p>
   <ul>
     <li>
-      <a href="/pages.tags/expression?q=a">Expression based attacks</a> -
-      Only allows pages.tags, but filtering out event handlers. It only allows style as a property,
+      <a href="/tags/expression?q=a">Expression based attacks</a> -
+      Only allows tags, but filtering out event handlers. It only allows style as a property,
       but explicitly blocks the word "expression" in the style. To exploit this
       vector, the payload has to use something like ex/**/pression or so. 
     </li>
     <li>
-      <a href="/pages.tags/multiline?q=a">Multiline pages.tags</a> -
-      Only multiline pages.tags allowed (%0a<code>&lt;script&gt;alert(1)&lt;/script&gt;)</code>.
+      <a href="/tags/multiline?q=a">Multiline tags</a> -
+      Only multiline tags allowed (%0a<code>&lt;script&gt;alert(1)&lt;/script&gt;)</code>.
       The server applies a single line regular expression to filter out any
       tag in the request, which can be tricked by a multiline payload.</li>
   </ul>
